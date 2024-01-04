@@ -44,8 +44,8 @@ zfs set mountpoint=/ rpool/ROOT/pve-1 && \
 zfs destroy -r rpool/copyroot && \
 # enable trim for ssds
 zpool set autotrim=on rpool && \
-# disable access time logging  
-zfs set atime=off rpool && \ 
+# disable access time logging
+zfs set atime=off rpool && \
 # optional: enable compression zstd-4, see https://www.reddit.com/r/zfs/comments/sxx9p7/a_simple_real_world_zfs_compression_speed_an/
 # zfs set recordsize=1M compression=zstd-4 rpool
 echo "Overview:" && \
