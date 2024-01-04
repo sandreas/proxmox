@@ -12,8 +12,13 @@ Go through the installation using ZFS and finish it
 - leave installer, enter shell and run the following
 
 ```bash
+# show ip
+ip a
+# if apt update does not work, this might help
+dhclient <interface-name>
+
 apt update
-apt install ssh
+apt -y install ssh curl
 echo "PermitRootLogin yes" >> /etc/sshd_config
 /etc/init.d/ssh restart 
 passwd root

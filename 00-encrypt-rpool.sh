@@ -1,6 +1,6 @@
 #!/bin/bash
 #####################
-# Sytem Rescue Boot #
+# Proxmox Debugmode #
 #####################
 
 # request passphrase input and store variable
