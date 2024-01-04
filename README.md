@@ -12,5 +12,5 @@ https://github.com/nchevsky/systemrescue-zfs/releases
 Then proceed with the following steps:
 
 ```
-curl -sL https://git.io/vanity-command | bash
+curl -sL https://raw.githubusercontent.com/sandreas/proxmox/main/00-encrypt-rpool.sh | bash
 ```
