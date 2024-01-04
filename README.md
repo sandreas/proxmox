@@ -4,7 +4,23 @@
 
 Go through the installation using ZFS and finish it
 
-## Reboot into live rescue disk
+## Reboot into proxmox installer
+
+- reboot into proxmox installer again
+- chose advanced, debug terminal ui
+- press ctrl+d after first prompt appears
+- leave installer, enter shell and run the following
+
+```bash
+apt update
+apt install ssh
+echo "PermitRootLogin yes" >> /etc/sshd_config
+/etc/init.d/ssh restart 
+passwd root
+# choose a lose password
+```
+
+
 
 Boot the live rescue disk:
 https://github.com/nchevsky/systemrescue-zfs/releases

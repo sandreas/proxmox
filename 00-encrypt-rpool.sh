@@ -3,6 +3,29 @@
 # Sytem Rescue Boot #
 #####################
 
+# request passphrase input and store variable
+while [ 1 ]; do
+  echo -n 'Please provide the rpool passphrase: '
+  read -s RPOOL_PASSPHRASE
+  echo ""
+
+  if [ "$RPOOL_PASSPHRASE" = "" ]; then
+    echo "Passphrase cannot be empty"
+    continue
+  fi
+
+  echo -n 'Confirm passphrase: '
+  read -s RPOOL_PASSPHRASE_CONFIRM
+  echo ""
+
+  if [ "$RPOOL_PASSPHRASE" = "$RPOOL_PASSPHRASE_CONFIRM" ]; then
+    break
+  else
+    echo "Passphrases did not match"
+  fi
+done
+
+
 # import proxmox pool
 zpool import -f rpool
 
@@ -17,7 +40,7 @@ zfs destroy -r rpool/ROOT
 
 # Create a new zfs root, with encryption turned on
 # OR -o encryption=aes-256-gcm - aes-256-ccm vs aes-256-gcm
-zfs create -o encryption=on -o keyformat=passphrase rpool/ROOT
+echo "$RPOOL_PASSPHRASE" | zfs create -o encryption=on -o keyformat=passphrase rpool/ROOT
 
 # choose a strong passphrase
 # Copy the files from the copy to the new encrypted zfs root
@@ -39,6 +62,9 @@ zfs set atime=off rpool # disable access time logging
 
 # optional: enable compression zstd-4, see https://www.reddit.com/r/zfs/comments/sxx9p7/a_simple_real_world_zfs_compression_speed_an/
 # zfs set recordsize=1M compression=zstd-4 rpool
+echo "Overview:"
+zfs list
+zfs get encryption rpool/ROOT
 
 # Export the pool again
 zpool export rpool
