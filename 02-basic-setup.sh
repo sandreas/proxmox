@@ -6,7 +6,7 @@
 # - configure portainer
 # - configure pi-hole
 # - configure immich
-
+# - check zfs get written and destroy copy datasets
 # update lists
 apt update
 
