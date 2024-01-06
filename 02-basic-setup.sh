@@ -13,6 +13,10 @@
 
 apt update
 
+# install base packages
+install_package git
+
+
 # reduce ssd wearout
 systemctl disable --now corosync pve-ha-lrm pve-ha-crm
 JOURNALD_CONF="/etc/systemd/journald.conf"
